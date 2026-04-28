@@ -189,3 +189,5 @@ ChartWrapper.propTypes = {
 };
 
 export default memo(ChartWrapper);
+
+// Done building a reusable ChartWrapper component with loading, error, and empty states. This will be used across all chart components for consistency and better user experience. 
