@@ -298,3 +298,5 @@ SpeciesDataTable.propTypes = {
   loading: PropTypes.bool,
   error: PropTypes.string,
 };
+
+// Done building the SpeciesDataTable component, which provides a comprehensive table view of species data with search, filter, sort, and pagination functionalities. The component is designed to handle various states such as loading, error, and empty data gracefully using the ChartWrapper. Users can easily explore and analyze species information through an intuitive interface that includes visual cues for conservation status and risk levels.
