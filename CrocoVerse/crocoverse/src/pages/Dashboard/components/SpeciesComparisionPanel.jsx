@@ -243,3 +243,5 @@ SpeciesComparisonPanel.propTypes = {
   loading: PropTypes.bool,
   error: PropTypes.string,
 };
+
+// Done building the SpeciesComparisonPanel component, which allows users to select two species and compare their key metrics side by side. The component includes dropdowns for species selection, conservation status badges, and a series of stat rows with animated progress bars for visual comparison. It handles loading, error, and empty states gracefully using the ChartWrapper. This panel provides an engaging way for users to explore differences and similarities between species in the dataset.
