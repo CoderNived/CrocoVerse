@@ -190,3 +190,5 @@ KPICard.propTypes = {
 
 
 export default memo(KPICard);
+
+// Done building the KPICard component, which is a reusable card for displaying key performance indicators with an icon, label, value, unit, and trend information. The component handles loading states and formats values for better readability. It also includes accessibility features such as aria-labels for screen readers.
