@@ -111,3 +111,5 @@ FilterBar.propTypes = {
 };
 
 export default memo(FilterBar);
+
+// Done building the FilterBar component with three dropdowns for continent, conservation status, and habitat. The component is reusable and accepts dynamic options and handlers for filter changes and reset. This will allow users to easily filter the dashboard data based on their interests.
