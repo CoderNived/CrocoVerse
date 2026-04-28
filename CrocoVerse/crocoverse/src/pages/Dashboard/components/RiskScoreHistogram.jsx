@@ -268,3 +268,5 @@ export default function RiskScoreHistogram() {
     </ChartWrapper>
   )
 }
+
+// Done building the RiskScoreHistogram component, which displays the distribution of species across different conservation risk score bins. The component includes a custom tooltip for detailed information on hover and a custom legend for clarity. It handles empty states gracefully and formats numbers for better readability. This histogram provides users with a clear visual representation of how species are distributed across risk levels, aiding in quick insights and decision-making.
