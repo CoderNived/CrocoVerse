@@ -17,9 +17,19 @@ const app = express()
 
 // 5. Global middleware (NO business logic)
 app.use(helmet())
-app.use(cors({ origin: env.FRONTEND_URL }))
-app.use(morgan(env.NODE_ENV === 'development' ? 'dev' : 'combined'))
-app.use(express.json())
+
+app.use(
+  cors({
+    origin: env.FRONTEND_URL,
+    credentials: true, // useful if you later use cookies/auth
+  })
+)
+
+app.use(
+  morgan(env.NODE_ENV === 'development' ? 'dev' : 'combined')
+)
+
+app.use(express.json({ limit: '10kb' })) // prevent large payload abuse
 
 // 6. Routes
 app.use('/api', rootRouter)
@@ -28,11 +38,13 @@ app.use('/api', rootRouter)
 app.use(errorHandler)
 
 // 8. Start server ONLY after DB connection
+let server
+
 const startServer = async () => {
   try {
     await connectDB()
 
-    app.listen(env.PORT, () => {
+    server = app.listen(env.PORT, () => {
       console.log(`🚀 Server running on port ${env.PORT}`)
     })
   } catch (error) {
@@ -42,3 +54,20 @@ const startServer = async () => {
 }
 
 startServer()
+
+// 9. Graceful shutdown (VERY important for production)
+const shutdown = (signal) => {
+  console.log(`⚠️ ${signal} received. Shutting down gracefully...`)
+
+  if (server) {
+    server.close(() => {
+      console.log('🛑 Server closed')
+      process.exit(0)
+    })
+  } else {
+    process.exit(0)
+  }
+}
+
+process.on('SIGINT', shutdown)
+process.on('SIGTERM', shutdown)
