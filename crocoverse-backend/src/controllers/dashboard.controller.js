@@ -1,13 +1,41 @@
 import { sendSuccess } from '../utils/apiResponse.js'
 
-export const getAggregatedStats = (req, res) =>
-  sendSuccess(res, null, 'Route working — implementation coming')
+// GET /api/dashboard/stats
+export const getAggregatedStats = async (req, res) => {
+  return sendSuccess(
+    res,
+    {
+      totalSpecies: 0,
+      endangered: 0,
+      observations: 0,
+    },
+    'Aggregated stats fetched (stub)'
+  )
+}
 
-export const getContinentDistribution = (req, res) =>
-  sendSuccess(res, null, 'Route working — implementation coming')
+// GET /api/dashboard/distribution
+export const getContinentDistribution = async (req, res) => {
+  return sendSuccess(
+    res,
+    [],
+    'Continent distribution fetched (stub)'
+  )
+}
 
-export const getConservationBreakdown = (req, res) =>
-  sendSuccess(res, null, 'Route working — implementation coming')
+// GET /api/dashboard/conservation
+export const getConservationBreakdown = async (req, res) => {
+  return sendSuccess(
+    res,
+    [],
+    'Conservation breakdown fetched (stub)'
+  )
+}
 
-export const getObservationTrends = (req, res) =>
-  sendSuccess(res, null, 'Route working — implementation coming')
+// GET /api/dashboard/observations
+export const getObservationTrends = async (req, res) => {
+  return sendSuccess(
+    res,
+    [],
+    'Observation trends fetched (stub)'
+  )
+}

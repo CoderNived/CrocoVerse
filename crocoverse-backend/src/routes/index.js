@@ -6,18 +6,19 @@ import mlRoutes from './ml.routes.js'
 import dashboardRoutes from './dashboard.routes.js'
 
 // Utils
-import { sendSuccess } from '../utils/apiResponse.js'
+import { sendSuccess, sendError } from '../utils/apiResponse.js'
 
 const router = express.Router()
 
-// 🔹 Health check (keep this ABOVE other routes for quick access)
+// 🔹 Health check (keep first)
 router.get('/health', (req, res) => {
   return sendSuccess(
     res,
     {
       status: 'ok',
-      uptime: process.uptime(), // seconds since server started
+      uptime: process.uptime(), // seconds
       timestamp: new Date().toISOString(),
+      environment: process.env.NODE_ENV || 'development',
     },
     'API is healthy'
   )
@@ -28,13 +29,13 @@ router.use('/species', speciesRoutes)
 router.use('/ml', mlRoutes)
 router.use('/dashboard', dashboardRoutes)
 
-// 🔹 404 handler (for unknown API routes)
-router.use('*', (req, res) => {
-  return res.status(404).json({
-    success: false,
-    error: `Route not found: ${req.originalUrl}`,
-    code: 404,
-  })
+// 🔹 404 handler (Express 5-safe, consistent response shape)
+router.use((req, res) => {
+  return sendError(
+    res,
+    `Route not found: ${req.originalUrl}`,
+    404
+  )
 })
 
 export default router
